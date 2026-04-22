@@ -1,0 +1,32 @@
+import numpy as np
+import tensorflow as tf
+import matplotlib.pyplot as plt
+
+# Input dataset (OR truth table)
+X = np.array([[0,0], [0,1], [1,0], [1,1]])
+y = np.array([[0], [1], [1], [1]])
+
+# Build model (single neuron sufficient)
+model = tf.keras.Sequential([
+    tf.keras.layers.Dense(1, activation='sigmoid', input_shape=(2,))
+])
+
+# Compile
+model.compile(optimizer='sgd', loss='binary_crossentropy', metrics=['accuracy'])
+
+# Train
+history = model.fit(X, y, epochs=100, verbose=0)
+
+# Predictions
+pred = model.predict(X)
+
+print("OR Predictions:")
+for i in range(len(X)):
+    print(X[i], "->", pred[i][0])
+
+# Plot accuracy
+plt.plot(history.history['accuracy'])
+plt.title("OR Gate Accuracy")
+plt.xlabel("Epochs")
+plt.ylabel("Accuracy")
+plt.show()
