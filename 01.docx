@@ -1,0 +1,66 @@
+# Install TensorFlow (run once in notebook)
+# !pip install tensorflow
+
+import tensorflow as tf
+import matplotlib.pyplot as plt
+
+# Check TensorFlow version
+print("TensorFlow Version:", tf.__version__)
+
+# Check GPU availability
+print("GPU Available:", tf.config.list_physical_devices('GPU'))
+
+# Simple tensor creation
+a = tf.constant([1, 2, 3])
+b = tf.constant([4, 5, 6])
+
+# Basic operation
+c = a + b
+print("Addition Result:", c.numpy())
+
+# Generate random tensor
+rand_tensor = tf.random.normal((1000,))
+
+# Plot distribution
+plt.hist(rand_tensor.numpy(), bins=30)
+plt.title("Random Tensor Distribution")
+plt.xlabel("Values")
+plt.ylabel("Frequency")
+plt.show()
+
+# Study: Eager Execution (default)
+print("Eager Execution Enabled:", tf.executing_eagerly())
+
+import tensorflow as tf
+import matplotlib.pyplot as plt
+
+# Create tensors
+x = tf.constant([[1, 2], [3, 4]])
+y = tf.constant([[5, 6], [7, 8]])
+
+# Operations
+add = tf.add(x, y)
+mul = tf.multiply(x, y)
+matmul = tf.matmul(x, y)
+
+print("Addition:\n", add.numpy())
+print("Multiplication:\n", mul.numpy())
+print("Matrix Multiplication:\n", matmul.numpy())
+
+# Reshape tensor
+reshaped = tf.reshape(x, (4,))
+print("Reshaped:", reshaped.numpy())
+
+# Generate values for visualization
+vals = tf.linspace(-10.0, 10.0, 100)
+
+# Apply activation functions
+relu = tf.nn.relu(vals)
+sigmoid = tf.nn.sigmoid(vals)
+
+# Plot
+plt.plot(vals, relu, label="ReLU")
+plt.plot(vals, sigmoid, label="Sigmoid")
+plt.legend()
+plt.title("Activation Functions")
+plt.show()
